@@ -5,6 +5,7 @@
   Jika cocok, cetak "Login Berhasil!"; jika tidak, cetak "Username atau Password salah.".
 */
 import 'dart:io';
+
 void main(List<String> args) {
   var database = {
     {'user': 'admin', 'pass': 'rahasia123'},
@@ -18,16 +19,21 @@ void main(List<String> args) {
   stdout.write('masukan password: ');
   String? password = stdin.readLineSync() ?? '';
 
+  bool isAuth = false;
+
   for (var data in database) {
-    var user = data['user'];
-    var pass = data['pass'];
+    var user = data['user']!;
+    var pass = data['pass']!;
 
     if (username == user && password == pass) {
-      print('anda berhasil Login');
-      break;
-    } else {
-      print('username atau password salah');
+      isAuth = true;
       break;
     }
+  }
+
+  if (isAuth) {
+    print('anda berhasil Login');
+  } else {
+    print('username atau password anda salah');
   }
 }
